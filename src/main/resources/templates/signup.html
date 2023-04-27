@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Expenses</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+	<h2>Зареєструйтесь, будь ласка</h2>
+
+	<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+		<div class="form-group">
+			<label for="name">Ім'я:</label>
+			<input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Enter name" required>
+		</div>
+		<div class="form-group">
+			<label for="email">Email:</label>
+			<input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Enter email" required>
+		</div>
+		<div class="form-group">
+			<label for="password">Password:</label>
+			<input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter password" required>
+		</div>
+		<div class="form-group">
+			<label for="confirmPassword">Підтвердити Password:</label>
+			<input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password" required>
+		</div>
+		<button type="submit" class="btn btn-primary">Зареєструватись</button>
+	</form>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+<!--      xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Daily Expenses</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--	<h3>Зареєструйтесь, будь ласка</h3>-->
+
+<!--	<form action="#" th:action="@{/signup}" th:object="${user}" method="post">-->
+
+<!--		<div class="form-group">-->
+<!--			<input type="text" th:field="*{name}" class="form-control"-->
+<!--				   id="name" placeholder="Name"> <span-->
+<!--				   th:if="${#fields.hasErrors('name')}" th:errors="*{name}"-->
+<!--				   class="text-danger"></span>-->
+<!--		 </div>-->
+<!--		 <div class="form-group">-->
+<!--			<input type="text" th:field="*{email}" class="form-control"-->
+<!--				   id="email" placeholder="Email"> <span-->
+<!--				   th:if="${#fields.hasErrors('email')}" th:errors="*{email}"-->
+<!--				   class="text-danger"></span>-->
+<!--		 </div>-->
+<!--		 <div class="form-group">-->
+<!--			 <input type="text" th:field="*{password}" class="form-control"-->
+<!--					id="password" placeholder="Password">-->
+<!--			 <ul class="text-danger" th:each="error: ${#fields.errors('password')}">-->
+<!--				 <li th:each="message : ${error.split(',')}">-->
+<!--					 <p class="error-message" th:text="${message}"></p>-->
+<!--				 </li>-->
+<!--			 </ul>-->
+<!--		 </div>-->
+
+<!--		 <div class="col-md-6 mt-5">-->
+<!--			 <input type="submit" class="btn btn-primary" value="Submit">-->
+<!--		 </div>-->
+<!--	</form>-->
+
+<!--</body>-->
+<!--</html>-->

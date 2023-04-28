@@ -29,13 +29,13 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Name cannot be empty")
+    @NotEmpty(message = "Назва витрати не повинна бути пустою")
     @NotNull
     private String name;
 
-    @NotNull(message = "Amount cannot be null")
-    @DecimalMin(value = "0.01", message = "Amount cannot be less than 0.01")
-    @DecimalMax(value = "999999.99", message = "Amount cannot be greater than 999999,99")
+    @NotNull(message = "Сума витрати не повинна бути нульовою")
+    @DecimalMin(value = "0.01", message = "Сума витрати повинна бути більше ніж 0.01")
+    @DecimalMax(value = "999999.99", message = "Сума витрати повинна бути менш ніж  999999,99")
     @NumberFormat(pattern = "#,##0.00")
     private BigDecimal amount;
 

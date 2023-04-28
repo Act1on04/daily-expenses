@@ -1,6 +1,7 @@
 package ua.opnu.dailyexpenses.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +35,7 @@ public class ExpensesController {
     }
 
 
-//    @GetMapping("/expenses/add")
-//    public String addNewExpense() {
-//        return "add_expense";
-//    }
+
 
     @GetMapping("/expenses/add")
     public String newExpense(ModelMap model) {
@@ -58,7 +56,7 @@ public class ExpensesController {
 
 
     @PostMapping("/expenses/add")
-    public String saveExpense(@RequestBody Expense expense) {
+    public String saveExpense(Expense expense) {
         service.addExpense(expense);
         return "redirect:/expenses";
     }

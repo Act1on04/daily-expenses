@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Expenses</title>
+</head>
+<body>
+<h3>Список витрат</h3>
+<table>
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Назва</th>
+        <th>Сума</th>
+        <th>Категорія</th>
+        <th>Опис</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="expense, stat : ${expenses}">
+        <td th:text="${stat.count}"></td>
+        <td th:text="${expense.name}"></td>
+        <td th:text="${expense.amount}"></td>
+        <td th:text="${expense.category}"></td>
+        <td th:text="${expense.description}"></td>
+<!--        <td th:text="${expense.expenseDate}"></td>-->
+        <td th:text="${#temporals.format(expense.expenseDate, 'dd.MM.yyyy')}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

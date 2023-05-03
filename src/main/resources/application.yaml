@@ -1,12 +1,19 @@
 spring:
   datasource:
+#    generate-unique-name: false
+#    name: DailyExpenses
     url: jdbc:h2:file:./DailyExpenses
     username: sa
     password: 123
     driverClassName: org.h2.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    show-sql: true
     hibernate:
-      ddl-auto: create-drop
+#      ddl-auto: create-drop
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
 
 

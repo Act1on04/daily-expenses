@@ -26,16 +26,11 @@ public class ExpensesController {
         return "index";
     }
 
-
-
     @GetMapping("/expenses")
     public String expensesList(ModelMap model){
         model.put("expenses", service.getExpensesList());
         return "list_expenses";
     }
-
-
-
 
     @GetMapping("/expenses/add")
     public String newExpense(ModelMap model) {
@@ -53,7 +48,6 @@ public class ExpensesController {
 //        service.addExpense(new Expense(name, amount, category, description, date));
 //        return "redirect:/expenses";
 //    }
-
 
     @PostMapping("/expenses/add")
     public String saveExpense(Expense expense) {

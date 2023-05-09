@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Expenses</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-3">
+    <h3>Відкорегувати витрату</h3>
+    <form action="#" th:action="@{/expenses/{id}(id=${expense.getId()})}" th:object="${expense}" method="post">
+        <div class="form-group">
+            <label for="name">Назва:</label>
+            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="amount">Сума:</label>
+            <input type="number" class="form-control" id="amount" name="amount" th:field="*{amount}" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Категорія:</label>
+            <input type="text" class="form-control" id="category" name="category" th:field="*{category}">
+        </div>
+        <div class="form-group">
+            <label for="description">Опис:</label>
+            <input type="text" class="form-control" id="description" name="description" th:field="*{description}">
+        </div>
+        <div class="form-group">
+            <label for="date">Дата:</label>
+            <input type="date" class="form-control" id="date" name="date" th:field="*{expenseDate}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+    </form>
+</div>
+</body>
+</html>

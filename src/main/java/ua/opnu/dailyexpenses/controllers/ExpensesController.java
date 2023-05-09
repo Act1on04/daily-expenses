@@ -38,23 +38,23 @@ public class ExpensesController {
         return "add_expense";
     }
 
-//    @PostMapping("/expenses/add")
-//    public String newExpense(@RequestParam String name,
-//                             BigDecimal amount,
-//                             String category,
-//                             String description,
-//                             LocalDate date
-//                            ){
-//        service.addExpense(new Expense(name, amount, category, description, date));
-//        return "redirect:/expenses";
-//    }
-
     @PostMapping("/expenses/add")
     public String saveExpense(Expense expense) {
         service.addExpense(expense);
         return "redirect:/expenses";
     }
 
+    @GetMapping("/expenses/{id}")
+    public String GetUpdateExpense(ModelMap model, @PathVariable Long id) {
+        model.addAttribute("expense", service.findById(id));
+        return "update_expense";
+    }
+
+    @PostMapping("/expenses/{id}")
+    public String updateExpense(@PathVariable Long id, @ModelAttribute("expense") Expense expense) {
+        service.update(id, expense);
+        return "redirect:/expenses";
+    }
 
 
 }

@@ -1,6 +1,5 @@
 package ua.opnu.dailyexpenses.services;
 
-public class UserService {
-
+public interface UserService {
 
 }

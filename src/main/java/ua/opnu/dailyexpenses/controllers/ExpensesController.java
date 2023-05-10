@@ -35,7 +35,9 @@ public class ExpensesController {
     @GetMapping("/expenses/add")
     public String newExpense(ModelMap model) {
         model.addAttribute("expense", new Expense());
-        return "add_expense";
+        model.addAttribute("title", "Додати нову витрату");
+        return "/expenses/edit";
+//        return "add_expense";
     }
 
     @PostMapping("/expenses/add")
@@ -47,7 +49,9 @@ public class ExpensesController {
     @GetMapping("/expenses/{id}")
     public String GetUpdateExpense(ModelMap model, @PathVariable Long id) {
         model.addAttribute("expense", service.findById(id));
-        return "update_expense";
+        model.addAttribute("title", "Відкорегувати витрату");
+        return "/expenses/edit";
+//        return "update_expense";
     }
 
     @PostMapping("/expenses/{id}")

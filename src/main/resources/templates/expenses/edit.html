@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Daily Expenses</title>
@@ -7,8 +7,14 @@
 </head>
 <body>
 <div class="container mt-3">
-    <h3>Додати нову витрату</h3>
-    <form action="#" th:action="@{/expenses/add}" th:object="${expense}" method="post">
+    <h3 class="text-center bg-primary text-white p-3" th:text="${title}">Дані про витрату</h3>
+    <form action="#"
+          method="post"
+          th:action="@{'/expenses/'+(${expense.id} ?: 'add')}"
+          th:action="@{/expenses/(${expense.id} ?: add)}"
+          th:action="@{${expense.id} ? '/expenses/1' : '/expenses/add'}"
+          th:action="@{/expenses/{id}(id=${expense.id})}"
+          th:object="${expense}">
         <div class="form-group">
             <label for="name">Назва:</label>
             <input type="text" class="form-control" id="name" name="name" th:field="*{name}" required>

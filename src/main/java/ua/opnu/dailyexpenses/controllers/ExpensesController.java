@@ -1,14 +1,17 @@
 package ua.opnu.dailyexpenses.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.repositories.ExpenseRepository;
 import ua.opnu.dailyexpenses.services.ExpenseService;
 
+import javax.naming.Binding;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
@@ -41,7 +44,8 @@ public class ExpensesController {
     }
 
     @PostMapping("/expenses/add")
-    public String saveExpense(Expense expense) {
+    public String saveExpense(@Valid Expense expense, BindingResult result) {
+        if (result.hasErrors()) return "/expenses/edit";
         service.addExpense(expense);
         return "redirect:/expenses";
     }
@@ -55,7 +59,8 @@ public class ExpensesController {
     }
 
     @PostMapping("/expenses/{id}")
-    public String updateExpense(@PathVariable Long id, @ModelAttribute("expense") Expense expense) {
+    public String updateExpense(@PathVariable Long id, @ModelAttribute("expense") @Valid Expense expense, BindingResult result) {
+        if (result.hasErrors()) return "/expenses/edit";
         service.update(id, expense);
         return "redirect:/expenses";
     }

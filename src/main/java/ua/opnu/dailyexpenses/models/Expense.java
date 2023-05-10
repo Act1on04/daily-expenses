@@ -1,10 +1,7 @@
 package ua.opnu.dailyexpenses.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMax;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,8 +26,7 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty(message = "Назва витрати не повинна бути пустою")
-    @NotNull
+    @NotBlank(message = "Назва витрати не повинна бути пустою")
     private String name;
 
     @NotNull(message = "Сума витрати не повинна бути нульовою")

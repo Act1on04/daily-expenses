@@ -37,7 +37,10 @@
             <input type="date" class="form-control" id="date" name="date" th:field="*{expenseDate}" required>
             <small class="text-danger" th:if="${#fields.hasErrors('expenseDate')}" th:errors="*{expenseDate}"/>
         </div>
-        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-success mt-3 mx-3 ml-auto" type="submit">Зберегти</button>
+            <a class="btn btn-secondary mt-3" href="/expenses">Відміна</a>
+        </div>
     </form>
 </div>
 </body>

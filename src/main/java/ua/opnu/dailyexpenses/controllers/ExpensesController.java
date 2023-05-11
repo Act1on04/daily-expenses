@@ -32,7 +32,7 @@ public class ExpensesController {
     @GetMapping("/expenses")
     public String expensesList(ModelMap model){
         model.put("expenses", service.getExpensesList());
-        return "list_expenses";
+        return "/expenses/list";
     }
 
     @GetMapping("/expenses/add")
@@ -51,7 +51,7 @@ public class ExpensesController {
     }
 
     @GetMapping("/expenses/{id}")
-    public String GetUpdateExpense(ModelMap model, @PathVariable Long id) {
+    public String updateExpense(ModelMap model, @PathVariable Long id) {
         model.addAttribute("expense", service.findById(id));
         model.addAttribute("title", "Відкорегувати витрату");
         return "/expenses/edit";
@@ -62,6 +62,12 @@ public class ExpensesController {
     public String updateExpense(@PathVariable Long id, @ModelAttribute("expense") @Valid Expense expense, BindingResult result) {
         if (result.hasErrors()) return "/expenses/edit";
         service.update(id, expense);
+        return "redirect:/expenses";
+    }
+
+    @DeleteMapping("/expenses/{id}")
+    public String deleteExpense(@PathVariable Long id) {
+        service.delete(id);
         return "redirect:/expenses";
     }
 

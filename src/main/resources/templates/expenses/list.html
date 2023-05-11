@@ -33,19 +33,16 @@
             <td th:text="${expense.category}"></td>
             <td th:text="${expense.description}"></td>
             <td th:text="${#temporals.format(expense.expenseDate, 'dd.MM.yyyy')}"></td>
-            <td>
-                <a th:href="@{/expenses/{id}/edit(id=${expense.id})}" class="btn btn-primary">Редагувати</a>
+            <td class="d-flex justify-content-end">
+                <a class="btn btn-warning btn-sm mx-3" th:href="@{/expenses/{id}(id=${expense.id})}">Редагувати</a>
                 <form th:action="@{/expenses/{id}(id=${expense.id})}" method="post" class="d-inline">
                     <input type="hidden" name="_method" value="delete">
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Ви дійсно хочете видалити цей запис?')">Видалити</button>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Ви дійсно хочете видалити цей запис?')">Видалити</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

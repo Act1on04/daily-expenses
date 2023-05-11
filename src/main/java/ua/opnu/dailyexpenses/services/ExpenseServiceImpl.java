@@ -1,6 +1,7 @@
 package ua.opnu.dailyexpenses.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.repositories.ExpenseRepository;
@@ -15,7 +16,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public List<Expense> getExpensesList(){
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "expenseDate").and(Sort.by(Sort.Direction.DESC, "amount")));
     }
 
     @Override
@@ -49,8 +50,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void delete(Long id) {
-        Expense expense = findById(id);
-        repository.delete(expense);
+        repository.deleteById(id);
     }
 
 

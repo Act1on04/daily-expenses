@@ -25,7 +25,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Enter your name")
+    @NotEmpty(message = "Ім'я не повинно бути пустим")
     private String name;
 
 
@@ -34,8 +34,8 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotEmpty(message = "Enter password")
-    @NotBlank(message = "Enter correct password")
+    @NotEmpty(message = "Введіть пароль")
+    @NotBlank(message = "Введіть коректний пароль")
     private String password;
 
     @CreationTimestamp

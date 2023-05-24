@@ -1,6 +1,7 @@
 package ua.opnu.dailyexpenses.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 import ua.opnu.dailyexpenses.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {

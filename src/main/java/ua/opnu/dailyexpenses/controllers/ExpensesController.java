@@ -2,26 +2,18 @@ package ua.opnu.dailyexpenses.controllers;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.opnu.dailyexpenses.models.Expense;
-import ua.opnu.dailyexpenses.repositories.ExpenseRepository;
 import ua.opnu.dailyexpenses.services.ExpenseService;
-
-import javax.naming.Binding;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 
 @Controller
 public class ExpensesController {
 
-//    @Autowired
+    @Autowired
     private ExpenseService service;
 
     @GetMapping("/")
@@ -51,7 +43,7 @@ public class ExpensesController {
     }
 
     @GetMapping("/expenses/{id}")
-    public String updateExpense(ModelMap model, @PathVariable Long id) {
+    public String updateExpenseView(ModelMap model, @PathVariable Long id) {
         model.addAttribute("expense", service.findById(id));
         model.addAttribute("title", "Відкорегувати витрату");
         return "/expenses/edit";

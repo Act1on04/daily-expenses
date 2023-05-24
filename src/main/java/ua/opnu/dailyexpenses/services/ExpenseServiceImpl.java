@@ -11,12 +11,15 @@ import java.util.List;
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 
-    @Autowired
+//    @Autowired
     private ExpenseRepository repository;
 
     @Override
     public List<Expense> getExpensesList(){
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "expenseDate").and(Sort.by(Sort.Direction.DESC, "amount")));
+        return repository.findAll(
+                Sort.by(Sort.Direction.DESC, "expenseDate")
+                .and(Sort.by(Sort.Direction.DESC, "amount"))
+        );
     }
 
     @Override

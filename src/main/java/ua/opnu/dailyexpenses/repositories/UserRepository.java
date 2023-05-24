@@ -5,5 +5,8 @@ import ua.opnu.dailyexpenses.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    Boolean existsByEmail(String email);
+
+    User findByEmail(String email);
 
 }

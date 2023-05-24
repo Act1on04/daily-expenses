@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 public class ExpensesController {
 
-    @Autowired
+//    @Autowired
     private ExpenseService service;
 
     @GetMapping("/")

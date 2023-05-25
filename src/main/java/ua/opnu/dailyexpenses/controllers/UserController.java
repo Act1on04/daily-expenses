@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.models.User;
 import ua.opnu.dailyexpenses.repositories.UserRepository;
 import ua.opnu.dailyexpenses.services.UserService;
+
 
 @Controller
 public class UserController {
@@ -51,11 +51,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@Valid User user, BindingResult result) {
-
+    public String loginUser(@ModelAttribute("email") String email, @ModelAttribute("password") String password, BindingResult result, ModelMap model) {
+            System.out.println(email);
         if (result.hasErrors()) return "/user/login";
-        loggedUser = user;
+//        loggedUser = user;
         isLogged = true;
-        return "redirect:/expanses";
+        return "redirect:/expenses";
     }
 }

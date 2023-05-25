@@ -2,9 +2,7 @@ package ua.opnu.dailyexpenses.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,19 +51,6 @@ public class Expense {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
-
-//    public Expense(String name,
-//                   BigDecimal amount,
-//                   String category,
-//                   String description,
-//                   LocalDate date) {
-//
-//        this.name = name;
-//        this.amount = amount;
-//        this.category = category;
-//        this.description = description;
-//        this.date = date;
-//    }
 
 
 }

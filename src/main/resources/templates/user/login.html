@@ -17,20 +17,16 @@
             <h3 class="text-shadow text-center">Авторизуйтесь, будь ласка</h3>
           </div>
           <div class="card-body">
-            <form action="#" method="post" th:action="@{/login}" >
+            <form action="#" method="post" th:action="@{/login}" th:object="${user}">
               <div class="form-group">
                 <label for="email">Email:</label>
-<!--                <input type="email" class="form-control" id="email" name="password" th:object="${email}" placeholder="Введіть email">-->
-<!--                <input type="email" class="form-control" id="email" th:name="${email}" placeholder="Введіть email">-->
-                <input type="email" class="form-control" id="email" name="email" placeholder="Введіть email">
-<!--                <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>-->
+                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Введіть email" required>
+                <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
               </div>
               <div class="form-group">
                 <label for="password">Пароль:</label>
-<!--                <input type="password" class="form-control" id="password" name="password" th:object="${password}" placeholder="Введіть пароль">-->
-<!--                <input type="password" class="form-control" id="password" th:name="${password}" placeholder="Введіть пароль">-->
-                <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль">
-<!--                <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>-->
+                <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Введіть пароль" required>
+                <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
               </div>
               <div class="d-flex justify-content-end">
                 <button class="shadow btn btn-primary mt-3 mx-3 ml-auto" type="submit">Увійти</button>

@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 
 @Data
@@ -25,7 +26,6 @@ public class User {
 
     @NotEmpty(message = "Ім'я не повинно бути пустим")
     private String name;
-
 
     @Email(message="{register.email.invalid}")
     @NotBlank(message="{register.email.invalid}")
@@ -43,4 +43,11 @@ public class User {
     @UpdateTimestamp
     @Column(name = "update_date")
     private Timestamp updateDate;
+
+    private List<Expense> expenses;
+
+    public void addExpense(Expense expense) {
+        expenses.add(expense);
+    }
+
 }

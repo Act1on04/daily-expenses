@@ -7,6 +7,7 @@
     <link href="/static/styles/main.css" th:href="@{/styles/main.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div th:replace="navbar :: navbar"></div>
     <div class="container mt-2">
         <h3 class="zag text-shadow text-center bg-primary text-white p-3 rounded shadow" th:text="${title}">Дані про витрату</h3>
         <form action="#"

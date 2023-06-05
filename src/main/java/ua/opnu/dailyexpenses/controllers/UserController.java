@@ -21,8 +21,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
-    public User loggedUser;
-    public Boolean isLogged;
+    public User loggedUser = null;
+    public Boolean isLogged = false;
 
     @GetMapping("/signup")
     public String newUser(ModelMap model) {
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(User user, BindingResult result) {
+    public String loginUser(User user, BindingResult result, ModelMap model) {
         String email = user.getEmail();
         String password = user.getPassword();
         if (!userRepo.existsByEmail(email)) {
@@ -63,7 +63,18 @@ public class UserController {
         if (result.hasErrors()) return "/user/login";
         loggedUser = userRepo.findByEmail(email);
         isLogged = true;
-        return "redirect:/expenses";
+        model.addAttribute("isLogged", isLogged);
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String loginUser(ModelMap model) {
+        if (isLogged) {
+            loggedUser = null;
+            isLogged = false;
+            model.addAttribute("isLogged", isLogged);
+        }
+        return "redirect:/";
     }
 
 }

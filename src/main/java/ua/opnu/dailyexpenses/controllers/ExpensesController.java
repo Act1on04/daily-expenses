@@ -16,8 +16,12 @@ public class ExpensesController {
     @Autowired
     private ExpenseService service;
 
+    @Autowired
+    private UserController UsrCntr;
+
     @GetMapping("/")
-    public String home() {
+    public String home(ModelMap model) {
+        model.addAttribute("isLogged", UsrCntr.isLogged);
         return "index";
     }
 

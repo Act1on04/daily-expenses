@@ -52,6 +52,8 @@ public class Expense {
     @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
 }

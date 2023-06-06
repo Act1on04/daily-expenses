@@ -6,6 +6,6 @@ public interface UserService {
 
     public User addUser(User user);
 
-    public User authorizeUser(String email, String password);
+//    public User authorizeUser(String email, String password);
 
 }

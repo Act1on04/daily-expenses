@@ -22,36 +22,49 @@ public class ExpensesController {
     @GetMapping("/")
     public String home(ModelMap model) {
         model.addAttribute("isLogged", UsrCntr.isLogged);
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/expenses")
     public String expensesList(ModelMap model){
-        model.put("expenses", service.getExpensesList());
-        return "/expenses/list";
+        if (UsrCntr.isLogged) {
+            model.put("expenses", service.getExpensesList());
+            model.addAttribute("isLogged", UsrCntr.isLogged);
+            return "/expenses/list";
+        } else {
+            return "/index";
+        }
     }
 
     @GetMapping("/expenses/add")
     public String newExpense(ModelMap model) {
-        model.addAttribute("expense", new Expense());
-        model.addAttribute("title", "Додати нову витрату");
-        return "/expenses/edit";
-//        return "add_expense";
+        if (UsrCntr.isLogged) {
+            model.addAttribute("expense", new Expense());
+            model.addAttribute("title", "Додати нову витрату");
+            model.addAttribute("isLogged", UsrCntr.isLogged);
+            return "/expenses/edit";
+        } else {
+            return "/index";
+        }
     }
 
     @PostMapping("/expenses/add")
     public String saveExpense(@Valid Expense expense, BindingResult result) {
         if (result.hasErrors()) return "/expenses/edit";
-        service.addExpense(expense);
+        service.addExpense(expense, UsrCntr.loggedUser.getId());
         return "redirect:/expenses";
     }
 
     @GetMapping("/expenses/{id}")
     public String updateExpenseView(ModelMap model, @PathVariable Long id) {
-        model.addAttribute("expense", service.findById(id));
-        model.addAttribute("title", "Відкорегувати витрату");
-        return "/expenses/edit";
-//        return "update_expense";
+        if (UsrCntr.isLogged) {
+            model.addAttribute("expense", service.findById(id));
+            model.addAttribute("title", "Відкорегувати витрату");
+            model.addAttribute("isLogged", UsrCntr.isLogged);
+            return "/expenses/edit";
+        } else {
+            return "/index";
+        }
     }
 
     @PostMapping("/expenses/{id}")

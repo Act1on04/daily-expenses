@@ -10,7 +10,7 @@ public interface ExpenseService {
 
     public Expense findById(Long id);
 
-    public Expense addExpense(Expense expense);
+    public Expense addExpense(Expense expense, Long user_id);
 
     public void update(Long id, Expense expense);
 

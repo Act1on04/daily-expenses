@@ -44,6 +44,7 @@ public class User {
     @Column(name = "update_date")
     private Timestamp updateDate;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
     public void addExpense(Expense expense) {

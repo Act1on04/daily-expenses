@@ -17,19 +17,19 @@ public class ExpensesController {
     private ExpenseService service;
 
     @Autowired
-    private UserController UsrCntr;
+    private UserController userController;
 
     @GetMapping("/")
     public String home(ModelMap model) {
-        model.addAttribute("isLogged", UsrCntr.isLogged);
+        model.addAttribute("isLogged", userController.isLogged);
         return "/index";
     }
 
     @GetMapping("/expenses")
     public String expensesList(ModelMap model){
-        if (UsrCntr.isLogged) {
+        if (userController.isLogged) {
             model.put("expenses", service.getExpensesList());
-            model.addAttribute("isLogged", UsrCntr.isLogged);
+            model.addAttribute("isLogged", userController.isLogged);
             return "/expenses/list";
         } else {
             return "/index";
@@ -38,10 +38,10 @@ public class ExpensesController {
 
     @GetMapping("/expenses/add")
     public String newExpense(ModelMap model) {
-        if (UsrCntr.isLogged) {
+        if (userController.isLogged) {
             model.addAttribute("expense", new Expense());
             model.addAttribute("title", "Додати нову витрату");
-            model.addAttribute("isLogged", UsrCntr.isLogged);
+            model.addAttribute("isLogged", userController.isLogged);
             return "/expenses/edit";
         } else {
             return "/index";
@@ -51,16 +51,16 @@ public class ExpensesController {
     @PostMapping("/expenses/add")
     public String saveExpense(@Valid Expense expense, BindingResult result) {
         if (result.hasErrors()) return "/expenses/edit";
-        service.addExpense(expense, UsrCntr.loggedUser.getId());
+        service.addExpense(expense, userController.loggedUser.getId());
         return "redirect:/expenses";
     }
 
     @GetMapping("/expenses/{id}")
     public String updateExpenseView(ModelMap model, @PathVariable Long id) {
-        if (UsrCntr.isLogged) {
+        if (userController.isLogged) {
             model.addAttribute("expense", service.findById(id));
             model.addAttribute("title", "Відкорегувати витрату");
-            model.addAttribute("isLogged", UsrCntr.isLogged);
+            model.addAttribute("isLogged", userController.isLogged);
             return "/expenses/edit";
         } else {
             return "/index";

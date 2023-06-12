@@ -2,6 +2,7 @@ package ua.opnu.dailyexpenses.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.models.User;
 import ua.opnu.dailyexpenses.repositories.UserRepository;
 
@@ -18,6 +19,21 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
         return user;
     }
+
+    @Override
+    public void updateUser(User user) {
+        if(userRepo.findById(user.getId()).isPresent()) {
+            User updatedUser = userRepo.findById(user.getId()).get();
+
+            updatedUser.setName(user.getName());
+            updatedUser.setEmail(user.getEmail());
+            updatedUser.setPassword(user.getPassword());
+
+
+            userRepo.save(user);
+        }
+    }
+
 
 //    @Override
 //    public User authorizeUser(String email, String password) {

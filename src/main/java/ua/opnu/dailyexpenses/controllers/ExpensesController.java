@@ -22,6 +22,9 @@ public class ExpensesController {
     @GetMapping("/")
     public String home(ModelMap model) {
         model.addAttribute("isLogged", userController.isLogged);
+        if (userController.isLogged) {
+            model.addAttribute("loggedUser", userController.loggedUser);
+        }
         return "/index";
     }
 
@@ -30,6 +33,7 @@ public class ExpensesController {
         if (userController.isLogged) {
             model.put("expenses", service.getExpensesList());
             model.addAttribute("isLogged", userController.isLogged);
+            model.addAttribute("loggedUser", userController.loggedUser);
             return "/expenses/list";
         } else {
             return "/index";
@@ -42,6 +46,7 @@ public class ExpensesController {
             model.addAttribute("expense", new Expense());
             model.addAttribute("title", "Додати нову витрату");
             model.addAttribute("isLogged", userController.isLogged);
+            model.addAttribute("loggedUser", userController.loggedUser);
             return "/expenses/edit";
         } else {
             return "/index";
@@ -61,6 +66,7 @@ public class ExpensesController {
             model.addAttribute("expense", service.findById(id));
             model.addAttribute("title", "Відкорегувати витрату");
             model.addAttribute("isLogged", userController.isLogged);
+            model.addAttribute("loggedUser", userController.loggedUser);
             return "/expenses/edit";
         } else {
             return "/index";

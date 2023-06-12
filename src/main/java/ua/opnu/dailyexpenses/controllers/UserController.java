@@ -76,4 +76,26 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/profile")
+    public String profileUser(ModelMap model) {
+        if (isLogged) {
+            model.addAttribute("isLogged", isLogged);
+            model.addAttribute("loggedUser", loggedUser);
+            return "/user/profile";
+        } else {
+            return "/index";
+        }
+
+    }
+
+    @PostMapping("/profile")
+    public String editUser(@ModelAttribute("loggedUser") @Valid User user, BindingResult result) {
+        if (userRepo.existsByEmail(user.getEmail())) {
+            result.rejectValue("email", "error.email","Обліковий запис з такою електронною поштою вже існує");
+        }
+        if (result.hasErrors()) return "/user/profile";
+        userService.updateUser(user);
+        return "redirect:/";
+    }
+
 }

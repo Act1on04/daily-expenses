@@ -33,16 +33,16 @@
                 </ul>
 
                 <ul class="navbar-nav navbar-right">
+                    <p th:if="${isLogged}" class="text-white text-shadow align-self-lg-end" th:text="${loggedUser.name}">User Name</p>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i th:if="${isLogged}" class="bi bi-person-fill-check text-white display-4 text-shadow"></i>
                             <i th:unless="${isLogged}" class="bi bi-person-fill-dash text-white display-4 text-shadow"></i>
                             <!--                            <img class="rounded-circle" width="30" height="30" src="images/default.png" />-->
-
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                             <div th:if="${isLogged}">
-                                <li><a class="dropdown-item" href="#">Профіль User</a></li>
+                                <li><a class="dropdown-item" href="/profile" th:text="${'Профіль ' + loggedUser.name}">Профіль</a></li>
                                 <li><a class="dropdown-item" href="#">Налаштування</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="/logout">Вийти</a></li>

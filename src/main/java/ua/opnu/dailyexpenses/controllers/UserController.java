@@ -2,6 +2,9 @@ package ua.opnu.dailyexpenses.controllers;
 
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -81,21 +84,43 @@ public class UserController {
         if (isLogged) {
             model.addAttribute("isLogged", isLogged);
             model.addAttribute("loggedUser", loggedUser);
+//            model.addAttribute("name", loggedUser.getName());
+//            model.addAttribute("email", loggedUser.getEmail());
             return "/user/profile";
         } else {
-            return "/index";
+            return "redirect:/";
         }
 
     }
 
     @PostMapping("/profile")
-    public String editUser(@ModelAttribute("loggedUser") @Valid User user, BindingResult result) {
-        if (userRepo.existsByEmail(user.getEmail())) {
+    public String editUser(@ModelAttribute("loggedUser") User user, BindingResult result) {
+        if (!loggedUser.getEmail().equals(user.getEmail()) && userRepo.existsByEmail(user.getEmail())) {
             result.rejectValue("email", "error.email","Обліковий запис з такою електронною поштою вже існує");
         }
         if (result.hasErrors()) return "/user/profile";
-        userService.updateUser(user);
+        loggedUser.setName(user.getName());
+        loggedUser.setEmail(user.getEmail());
+        userService.updateUser(loggedUser);
         return "redirect:/";
     }
+
+
+//    @PostMapping("/profile")
+//    public String editUser(
+//            @ModelAttribute("name") @NotEmpty @Valid String name,
+//            @ModelAttribute("email") @NotNull @Valid Email email,
+//            BindingResult result
+//    ) {
+//        if (!loggedUser.getEmail().equals(email) && userRepo.existsByEmail(email.toString())) {
+//            result.rejectValue("email", "error.email","Обліковий запис з такою електронною поштою вже існує");
+//        }
+//        if (result.hasErrors()) return "/user/profile";
+//        loggedUser.setName(name);
+//        loggedUser.setEmail(email.toString());
+//        userService.updateUser(loggedUser);
+//        return "redirect:/";
+//    }
+
 
 }

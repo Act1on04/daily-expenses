@@ -18,21 +18,21 @@
           <h3 class="text-shadow text-center">Відкорегуйте свої дані</h3>
         </div>
         <div class="card-body">
-          <form action="#" th:action="@{/signup}" th:object="${loggedUser}" method="post">
+          <form action="#" th:action="@{/profile}" th:object="${loggedUser}" method="post">
+<!--          <form action="#" th:action="@{/profile}" method="post">-->
             <div class="form-group">
               <label for="name">Ім'я:</label>
               <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Ім'я" required>
               <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
+<!--              <input type="text" class="form-control" id="name" th:field="${name}" placeholder="Ім'я" required>-->
+<!--              <small class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="${name}"></small>-->
             </div>
             <div class="form-group">
               <label for="email">Email:</label>
               <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Email" required>
               <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
-            </div>
-            <div class="form-group">
-              <label for="password">Пароль:</label>
-              <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Пароль" required>
-              <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
+<!--              <input type="email" class="form-control" id="email" th:field="${email}" placeholder="Email" required>-->
+<!--              <small class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="${email}"></small>-->
             </div>
             <div class="d-flex justify-content-end">
               <button class="shadow btn btn-success mt-3 mx-3 ml-auto" type="submit">Відкорегувати</button>

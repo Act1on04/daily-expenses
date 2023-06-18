@@ -6,6 +6,8 @@ import ua.opnu.dailyexpenses.controllers.UserController;
 import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.repositories.ExpenseRepository;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -67,7 +69,10 @@ public class ExpenseServiceImpl implements ExpenseService {
         repository.deleteById(id);
     }
 
-
+    @Override
+    public double getSumOfAmountFromDate(Long user_id, LocalDate fromDate) {
+        return repository.sumOfAmountFromDate(user_id, fromDate);
+    }
 
 
 }

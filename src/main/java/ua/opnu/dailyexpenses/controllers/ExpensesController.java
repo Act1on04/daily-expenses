@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import ua.opnu.dailyexpenses.models.Expense;
 import ua.opnu.dailyexpenses.services.ExpenseService;
 
+import java.time.LocalDate;
+
 
 @Controller
 public class ExpensesController {
@@ -34,6 +36,7 @@ public class ExpensesController {
             model.put("expenses", service.getExpensesList());
             model.addAttribute("isLogged", userController.isLogged);
             model.addAttribute("loggedUser", userController.loggedUser);
+            model.addAttribute("SumOfExpenses", service.getSumOfAmountFromDate(userController.loggedUser.getId(), LocalDate.now().withDayOfMonth(1)));
             return "/expenses/list";
         } else {
             return "/index";

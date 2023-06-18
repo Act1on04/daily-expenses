@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ua.opnu.dailyexpenses.models.Expense;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public interface ExpenseRepository extends JpaRepository<Expense, Long> {
@@ -14,5 +16,8 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findAllByUser_Id(Long user_id);
 
     List<Expense> findAllByUser_IdOrderByExpenseDateDescAmountDesc(Long user_id);
+
+    @Query("SELECT sum(e.amount) FROM Expense e WHERE e.user.id = :user_id AND e.expenseDate >= :fromDate ")
+    double sumOfAmountFromDate(Long user_id, LocalDate fromDate);
 
 }

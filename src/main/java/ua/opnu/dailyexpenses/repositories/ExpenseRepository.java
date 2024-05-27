@@ -17,7 +17,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     List<Expense> findAllByUser_IdOrderByExpenseDateDescAmountDesc(Long user_id);
 
-    @Query("SELECT sum(e.amount) FROM Expense e WHERE e.user.id = :user_id AND e.expenseDate >= :fromDate ")
+    @Query("SELECT COALESCE(SUM(e.amount), 0) FROM Expense e WHERE e.user.id = :user_id AND e.expenseDate >= :fromDate ")
     double sumOfAmountFromDate(Long user_id, LocalDate fromDate);
 
 }
